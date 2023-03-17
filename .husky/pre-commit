@@ -2,3 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npx lint-staged
+# Antes de realiza o commit busca por erros e tenta corrigí-los, caso não consiga para o commit

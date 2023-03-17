@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+.git/hooks/commit-msg $1
+# verifica se a mensagem do commit está no padrão do conventional commits, caso não esteja para o commit
