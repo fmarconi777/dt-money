@@ -1,21 +1,6 @@
-import { HttpGetClient } from 'service/protocols/api/http-get-client'
+import { HttpGetClient } from '../../../../src/service/protocols/api/http-get-client'
 import { RemoteLoadTransactionList } from '../../../../src/service/usecases/transaction/remote-load-transaction-list'
-
-const makeHttpGetClientSpy = (): HttpGetClient => {
-  class HttpGetClientSpy implements HttpGetClient {
-    private url: string
-
-    async get<T> (url: string): Promise<T[]> {
-      this.url = url
-      return []
-    }
-
-    getUrl (): string {
-      return this.url
-    }
-  }
-  return new HttpGetClientSpy()
-}
+import { HttpGetClientSpy } from '../../mocks/mock-http-client'
 
 type SubTypes = {
   sut: RemoteLoadTransactionList
@@ -23,7 +8,7 @@ type SubTypes = {
 }
 
 const makeSut = (url = 'any_url'): SubTypes => {
-  const httpGetClientSpy = makeHttpGetClientSpy()
+  const httpGetClientSpy = new HttpGetClientSpy()
   const sut = new RemoteLoadTransactionList(url, httpGetClientSpy)
   return {
     sut,
