@@ -9,7 +9,9 @@ export class RemoteLoadTransactionList implements Transaction {
   ) { }
 
   async loadTransanctionList (): Promise<TransactionModel[]> {
-    await this.httpGetClient.get(this.url)
+    await this.httpGetClient.get({
+      url: this.url
+    })
     return []
   }
 }
