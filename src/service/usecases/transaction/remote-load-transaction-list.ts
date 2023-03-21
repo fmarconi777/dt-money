@@ -1,6 +1,8 @@
-import { TransactionModel } from 'domain/model/transaction-model'
-import { Transaction } from 'domain/usecases/transaction'
-import { HttpGetClient } from 'service/protocols/api/http-get-client'
+import { UnexpectedError } from '@/domain/errors/unexpected-error'
+import { TransactionModel } from '@/domain/model/transaction-model'
+import { Transaction } from '@/domain/usecases/transaction'
+import { HttpGetClient } from '@/service/protocols/api/http-get-client'
+import { HttpStatusCode } from '@/service/protocols/api/http-response'
 
 export class RemoteLoadTransactionList implements Transaction {
   constructor (
@@ -9,9 +11,12 @@ export class RemoteLoadTransactionList implements Transaction {
   ) { }
 
   async loadTransanctionList (): Promise<TransactionModel[]> {
-    await this.httpGetClient.get({
+    const httpResponse = await this.httpGetClient.get({
       url: this.url
     })
-    return []
+    switch (httpResponse.statusCode) {
+      case HttpStatusCode.ok: return []
+      default: throw new UnexpectedError()
+    }
   }
 }
