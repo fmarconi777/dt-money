@@ -1,14 +1,14 @@
 import { HttpGetClient, HttpGetParams } from '../../../src/service/protocols/api/http-get-client'
+import { HttpResponse, HttpStatusCode } from '../../../src/service/protocols/api/http-response'
 
 export class HttpGetClientSpy implements HttpGetClient {
-  private url: string
-
-  async get<T> (params: HttpGetParams): Promise<T[]> {
-    this.url = params.url
-    return []
+  url: string
+  response: HttpResponse = {
+    statusCode: HttpStatusCode.ok
   }
 
-  getUrl (): string {
-    return this.url
+  async get (params: HttpGetParams): Promise<HttpResponse> {
+    this.url = params.url
+    return await Promise.resolve(this.response)
   }
 }
