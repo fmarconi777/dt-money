@@ -1,4 +1,4 @@
-import { TransactionModel } from '../../../src/domain/model/transaction-model'
+import { TransactionModel } from '@/domain/model/transaction-model'
 import faker from 'faker'
 
 export const mockTransactionModel = (): TransactionModel => ({

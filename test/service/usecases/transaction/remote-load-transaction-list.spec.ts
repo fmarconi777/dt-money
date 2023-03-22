@@ -1,10 +1,10 @@
-import { HttpGetClient } from '../../../../src/service/protocols/api/http-get-client'
-import { HttpStatusCode } from '../../../../src/service/protocols/api/http-response'
-import { RemoteLoadTransactionList } from '../../../../src/service/usecases/transaction/remote-load-transaction-list'
-import { TransactionModel } from '../../../../src/domain/model/transaction-model'
-import { UnexpectedError } from '../../../../src/domain/errors/unexpected-error'
-import { HttpGetClientSpy } from '../../mocks/mock-http-client'
-import { mockTransactionModel } from '../../mocks/mock-transaction'
+import { HttpGetClient } from '@/service/protocols/api/http-get-client'
+import { HttpStatusCode } from '@/service/protocols/api/http-response'
+import { RemoteLoadTransactionList } from '@/service/usecases/transaction/remote-load-transaction-list'
+import { TransactionModel } from '@/domain/model/transaction-model'
+import { UnexpectedError } from '@/domain/errors/unexpected-error'
+import { HttpGetClientSpy } from '@/test/service/mocks/mock-http-client'
+import { mockTransactionModel } from '@/test/service/mocks/mock-transaction'
 import faker from 'faker'
 
 type SubTypes = {
