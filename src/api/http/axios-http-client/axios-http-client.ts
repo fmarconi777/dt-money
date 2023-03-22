@@ -3,8 +3,7 @@ import axios from 'axios'
 
 export class AxiosHttpClient implements HttpGetClient<HttpGetParams<any>, any> {
   async get (params: HttpGetParams<any>): Promise<HttpResponse<any>> {
-    await axios(params.url)
-    console.log(params.url)
+    await axios.get(params.url)
     return {
       statusCode: HttpStatusCode.ok,
       body: ''
