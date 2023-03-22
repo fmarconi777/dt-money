@@ -1,7 +1,7 @@
 import { UnexpectedError } from '@/domain/errors'
 import { TransactionModel } from '@/domain/models'
 import { Transaction } from '@/domain/usecases'
-import { HttpStatusCode, HttpGetClient } from '@/service/protocols/api'
+import { HttpStatusCode, HttpGetClient } from '@/service/protocols/api/http'
 
 export class RemoteLoadTransactionList implements Transaction {
   constructor (

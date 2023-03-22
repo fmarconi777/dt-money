@@ -1,4 +1,4 @@
-import { HttpGetClient, HttpGetParams, HttpResponse, HttpStatusCode } from '@/service/protocols/api'
+import { HttpGetClient, HttpGetParams, HttpResponse, HttpStatusCode } from '@/service/protocols/api/http'
 
 export class HttpGetClientSpy<T, R> implements HttpGetClient<T, R> {
   url: string

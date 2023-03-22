@@ -1,4 +1,4 @@
-import { HttpGetClient, HttpStatusCode } from '@/service/protocols/api'
+import { HttpGetClient, HttpStatusCode } from '@/service/protocols/api/http'
 import { RemoteLoadTransactionList } from '@/service/usecases/transaction/remote-load-transaction-list'
 import { TransactionModel } from '@/domain/models'
 import { UnexpectedError } from '@/domain/errors'
