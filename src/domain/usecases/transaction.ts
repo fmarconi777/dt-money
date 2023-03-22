@@ -1,4 +1,4 @@
-import { TransactionModel } from 'domain/model/transaction-model'
+import { TransactionModel } from '@/domain/models'
 
 export interface Transaction {
   loadTransanctionList: () => Promise<TransactionModel[]>
