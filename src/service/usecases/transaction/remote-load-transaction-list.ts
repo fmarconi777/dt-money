@@ -7,7 +7,7 @@ import { HttpStatusCode } from '@/service/protocols/api/http-response'
 export class RemoteLoadTransactionList implements Transaction {
   constructor (
     private readonly url: string,
-    private readonly httpGetClient: HttpGetClient
+    private readonly httpGetClient: HttpGetClient<void, TransactionModel[]>
   ) { }
 
   async loadTransanctionList (): Promise<TransactionModel[]> {
@@ -15,7 +15,7 @@ export class RemoteLoadTransactionList implements Transaction {
       url: this.url
     })
     switch (httpResponse.statusCode) {
-      case HttpStatusCode.ok: return []
+      case HttpStatusCode.ok: return httpResponse.body
       default: throw new UnexpectedError()
     }
   }
