@@ -1,17 +1,19 @@
 import { HttpGetClient } from '../../../../src/service/protocols/api/http-get-client'
 import { HttpStatusCode } from '../../../../src/service/protocols/api/http-response'
 import { RemoteLoadTransactionList } from '../../../../src/service/usecases/transaction/remote-load-transaction-list'
+import { TransactionModel } from '../../../../src/domain/model/transaction-model'
 import { UnexpectedError } from '../../../../src/domain/errors/unexpected-error'
 import { HttpGetClientSpy } from '../../mocks/mock-http-client'
+import { mockTransactionModel } from '../../mocks/mock-transaction'
 import faker from 'faker'
 
 type SubTypes = {
   sut: RemoteLoadTransactionList
-  httpGetClientSpy: HttpGetClient
+  httpGetClientSpy: HttpGetClient<void, TransactionModel[]>
 }
 
 const makeSut = (url: string = faker.internet.url()): SubTypes => {
-  const httpGetClientSpy = new HttpGetClientSpy()
+  const httpGetClientSpy = new HttpGetClientSpy<void, TransactionModel[]>()
   const sut = new RemoteLoadTransactionList(url, httpGetClientSpy)
   return {
     sut,
@@ -55,5 +57,15 @@ describe('RemoteLoadTransactionList', () => {
     const promise = sut.loadTransanctionList()
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
+
+  test('should return an array of TransactionModel if HttpGetClient returns 200', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    const httpResult = [mockTransactionModel()]
+    jest.spyOn(httpGetClientSpy, 'get').mockReturnValueOnce(Promise.resolve({ statusCode: HttpStatusCode.ok, body: httpResult }))
+
+    const transactionArray = await sut.loadTransanctionList()
+
+    expect(transactionArray).toEqual(httpResult)
   })
 })
