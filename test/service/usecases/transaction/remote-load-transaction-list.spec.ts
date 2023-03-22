@@ -2,15 +2,16 @@ import { HttpGetClient, HttpStatusCode } from '@/service/protocols/api/http'
 import { RemoteLoadTransactionList } from '@/service/usecases/transaction/remote-load-transaction-list'
 import { TransactionModel } from '@/domain/models'
 import { UnexpectedError } from '@/domain/errors'
-import { HttpGetClientSpy, mockTransactionModel } from '@/test/service/mocks'
+import { mockTransactionModel } from '@/test/domain/models'
+import { HttpGetClientSpy } from '@/test/service/mocks'
 import faker from 'faker'
 
-type SubTypes = {
+type SutTypes = {
   sut: RemoteLoadTransactionList
   httpGetClientSpy: HttpGetClient<void, TransactionModel[]>
 }
 
-const makeSut = (url: string = faker.internet.url()): SubTypes => {
+const makeSut = (url: string = faker.internet.url()): SutTypes => {
   const httpGetClientSpy = new HttpGetClientSpy<void, TransactionModel[]>()
   const sut = new RemoteLoadTransactionList(url, httpGetClientSpy)
   return {
