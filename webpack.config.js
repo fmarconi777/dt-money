@@ -5,12 +5,12 @@ module.exports = {
   mode: 'development',
   entry: './src/main/index.tsx',
   output: {
-    path: path.join(__dirname, 'public/js'),
-    publicPath: '/public/js',
+    path: path.join(__dirname, '/public/js'),
+    publicPath: '/',
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', 'scss'],
+    extensions: ['.ts', '.tsx', '.js'],
     alias: {
       '@': path.join(__dirname, 'src')
     }
@@ -20,24 +20,17 @@ module.exports = {
       test: /\.ts(x?)$/,
       loader: 'ts-loader',
       exclude: /node_modules/
-    }, {
-      test: /\.scss$/,
-      use: [{
-        loader: 'style-loader'
-      }, {
-        loader: 'css-loader',
-        options: {
-          modules: true
-        }
-      }, {
-        loader: 'sass-loader'
-      }]
     }]
   },
-  devserver: {
-    contentBase: './public',
-    writeToDisk: true,
-    historyApiFallback: true
+  devtool: 'inline-source-map',
+  devServer: {
+    static: {
+      directory: './public',
+    },
+    historyApiFallback: true,
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
   externals: {
     react: 'React',
