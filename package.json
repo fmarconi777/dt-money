@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@svgr/webpack": "^7.0.0",
     "@types/axios": "^0.14.0",
     "@types/faker": "^5.5.3",
     "@types/jest": "^29.5.0",
