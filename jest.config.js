@@ -93,6 +93,7 @@ module.exports = {
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '@/test/(.*)': '<rootDir>/test/$1',
+    '\\.svg$': '<rootDir>/test/mocks/svg.js',
     '@/(.*)': '<rootDir>/src/$1'
   },
 
