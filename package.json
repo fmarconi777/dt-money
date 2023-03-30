@@ -38,6 +38,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "jest-styled-components": "^7.1.1",
     "lint-staged": "^13.2.0",
+    "miragejs": "^0.1.47",
     "styled-components": "^5.3.9",
     "ts-jest": "^29.0.5",
     "ts-loader": "^9.4.2",
