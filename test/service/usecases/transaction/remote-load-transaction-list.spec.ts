@@ -26,7 +26,7 @@ describe('RemoteLoadTransactionList', () => {
     const { sut, httpGetClientSpy } = makeSut(url)
     const getSpy = jest.spyOn(httpGetClientSpy, 'get')
 
-    await sut.loadTransanctionList()
+    await sut.loadAll()
 
     expect(getSpy).toHaveBeenCalledWith({ url })
   })
@@ -35,7 +35,7 @@ describe('RemoteLoadTransactionList', () => {
     const { sut, httpGetClientSpy } = makeSut()
     jest.spyOn(httpGetClientSpy, 'get').mockReturnValueOnce(Promise.resolve({ statusCode: HttpStatusCode.badRequest }))
 
-    const promise = sut.loadTransanctionList()
+    const promise = sut.loadAll()
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
@@ -44,7 +44,7 @@ describe('RemoteLoadTransactionList', () => {
     const { sut, httpGetClientSpy } = makeSut()
     jest.spyOn(httpGetClientSpy, 'get').mockReturnValueOnce(Promise.resolve({ statusCode: HttpStatusCode.notFound }))
 
-    const promise = sut.loadTransanctionList()
+    const promise = sut.loadAll()
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
@@ -53,7 +53,7 @@ describe('RemoteLoadTransactionList', () => {
     const { sut, httpGetClientSpy } = makeSut()
     jest.spyOn(httpGetClientSpy, 'get').mockReturnValueOnce(Promise.resolve({ statusCode: HttpStatusCode.serverError }))
 
-    const promise = sut.loadTransanctionList()
+    const promise = sut.loadAll()
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
@@ -63,7 +63,7 @@ describe('RemoteLoadTransactionList', () => {
     const httpResult = [mockTransactionModel()]
     jest.spyOn(httpGetClientSpy, 'get').mockReturnValueOnce(Promise.resolve({ statusCode: HttpStatusCode.ok, body: httpResult }))
 
-    const transactionArray = await sut.loadTransanctionList()
+    const transactionArray = await sut.loadAll()
 
     expect(transactionArray).toEqual(httpResult)
   })
