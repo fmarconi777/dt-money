@@ -19,6 +19,9 @@ module.exports = {
     rules: [{
       test: /\.ts(x?)$/,
       loader: 'ts-loader',
+      options: {
+        getCustomTransformers: () => ({ before: [styledComponentsTransformer] })
+      },
       exclude: /node_modules/
     }, {
       test: /\.svg$/i,
