@@ -111,5 +111,5 @@
       }
     ]
   },
-  "include": ["src", "test"]
+  "include": ["src", "test", "./jest-setup.ts"]
 }
