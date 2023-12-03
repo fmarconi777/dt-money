@@ -3,12 +3,16 @@ import LogoImg from '@/views/assets/logo.svg'
 import React from 'react'
 import { Container, Content } from './styles'
 
-export const Header: React.FC = () => {
+type HeaderProps = {
+  onOpenNewransactionModal: () => void
+}
+
+export const Header: React.FC<HeaderProps> = ({ onOpenNewransactionModal }: HeaderProps) => {
   return (
     <Container>
       <Content>
         <LogoImg />
-        <button type='button'>
+        <button type='button' onClick={onOpenNewransactionModal}>
           Nova transação
         </button>
       </Content>
